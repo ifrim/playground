@@ -1,0 +1,37 @@
+<!doctype html>
+<title></title>
+
+<template id="tpl">
+	<style>
+		.wrapper { border: 1px solid blue; }
+	</style>
+	<div class="wrapper">
+		<p>some meaningful text</p>
+		<img src="../logo.svg">
+	</div>
+	<hr>
+	<script>console.log('(ab)using templates');</script>
+</template>
+
+<div class="wrapper">random div with a class named 'wrapper'</div>
+<button onclick="useTemplate()">use the template</button>
+<select id="img-select">
+	<option value="icon-polymer.png">icon-polymer.png</option>
+	<option value="logo.svg">logo.svg</option>
+</select>
+<div id="target"></div>
+
+<script>
+	var tpl = document.querySelector('#tpl'),
+		target = document.querySelector('#target'),
+		imgSelect = document.querySelector('#img-select');
+
+	function useTemplate() {
+		tpl.content.querySelector('img').src = '../' + imgSelect.value;
+		target.appendChild(getTemplateClone(tpl));
+	}
+
+	function getTemplateClone(tpl) {
+		return document.importNode(tpl.content, true /* deep copy */);
+	}
+</script>
