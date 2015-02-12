@@ -9,9 +9,7 @@
 </div>
 
 <template id="tpl">
-	<header>
-		<content select="h2"></content>
-	</header>
+	<content select="h2"></content>
 	<section>
 		<content select="div"></content>
 	</section>
@@ -43,7 +41,7 @@
 		h2 = document.querySelector('#host h2'),
 		insertionPoints;
 
-	root2.innerHTML = '<shadow></shadow><content select="h2" id="point1"></content><content select="h2" id="point2"></content>';
+	root2.innerHTML = '<shadow></shadow>';
 	insertionPoints = h2.getDestinationInsertionPoints();
 	[].forEach.call(insertionPoints, function(el) {
 		console.log(el);
