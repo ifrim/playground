@@ -1,0 +1,16 @@
+<!doctype html>
+<title></title>
+
+<div id="host">host text</div>
+
+<script>
+	var host = document.querySelector('#host'),
+	    root1 = host.createShadowRoot(),
+	    root2 = host.createShadowRoot();
+
+	root1.innerHTML = '<div>The first shadow root</div><content></content>';
+	root2.innerHTML = '<shadow></shadow><div>The second shadow root</div>';
+
+	console.log('back to the roots', host.shadowRoot === root2);
+	console.log('old vs new, it\'s a little bit of history repeating', root2.olderShadowRoot === root1);
+</script>

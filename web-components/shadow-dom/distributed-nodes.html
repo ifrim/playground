@@ -1,0 +1,52 @@
+<!doctype html>
+<title></title>
+
+<div id="host">
+	<h2>Vlad</h2>
+	<h2>Ifrim</h2>
+	<div>a div</div>
+	<h3>a h3</h3>
+</div>
+
+<template id="tpl">
+	<header>
+		<content select="h2"></content>
+	</header>
+	<section>
+		<content select="div"></content>
+	</section>
+	<footer>
+		<content select="h3:first-of-type"></content>
+	</footer>
+</template>
+
+<script>
+	var tpl = document.querySelector('#tpl'),
+		tplClone = document.importNode(tpl.content, true),
+		host = document.querySelector('#host'),
+	    root = host.createShadowRoot();
+
+	root.appendChild(tplClone);
+
+	var html = [];
+	[].forEach.call(root.querySelectorAll('content'), function(el) {
+		html.push(el.outerHTML + ': ');
+		var nodes = el.getDistributedNodes();
+		[].forEach.call(nodes, function(node) {
+			html.push(node.outerHTML);
+		});
+		html.push('\n');
+	});
+	console.log(html.join(''));
+
+	var root2 = host.createShadowRoot(),
+		h2 = document.querySelector('#host h2'),
+		insertionPoints;
+
+	root2.innerHTML = '<shadow></shadow><content select="h2" id="point1"></content><content select="h2" id="point2"></content>';
+	insertionPoints = h2.getDestinationInsertionPoints();
+	[].forEach.call(insertionPoints, function(el) {
+		console.log(el);
+	});
+
+</script>
