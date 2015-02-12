@@ -1,0 +1,65 @@
+<!doctype html>
+<title></title>
+
+<style>
+	#host1::shadow span {
+		border: 1px dotted green;
+		margin: 0 4px;
+	}
+	#host2 /deep/ span {
+		border: 1px dashed magenta;
+		margin: 0 4px;
+	}
+	p {
+		color: blue;
+	}
+	span {
+		background-color: pink;
+	}
+</style>
+
+<template id="tpl">
+	<style>
+		:host-context(.a-theme) {
+			border: 1px solid #ccc;
+		}
+		:host {
+			border: 1px solid orange;
+		}
+		:host(:hover) {
+			border: 1px solid red;
+		}
+		::content span {
+			letter-spacing: 5px;
+		}
+		p {
+			font-style: italic;
+		}
+		span {
+			text-decoration: underline;
+		}
+	</style>
+	<p>My name is <content></content><span class="bang">!</span></p>
+</template>
+
+<p>I am a random paragraph. <span>And I am a span inside the paragraph</span></p>
+
+<div class="a-theme">
+	<div id="host1"><span>Vlad</span></div>
+</div>
+<br>
+<div id="host2"><span>Mihai</span></div>
+
+<script>
+	var tpl = document.querySelector('#tpl');
+
+	addShadow(document.querySelector('#host1'));
+	addShadow(document.querySelector('#host2'));
+
+	function addShadow(host) {
+		var root = host.createShadowRoot(),
+		    tplClone = document.importNode(tpl.content, true);
+
+		root.appendChild(tplClone);
+	}
+</script>
