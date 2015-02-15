@@ -1,0 +1,35 @@
+<!doctype html>
+<title></title>
+
+<div id="host">host text</div>
+
+<script>
+	var host = document.querySelector('#host'),
+	    root1 = host.createShadowRoot(),
+	    root2 = host.createShadowRoot();
+
+	root1.innerHTML = '<div>The first shadow root</div><content></content>';
+	root2.innerHTML = '<shadow></shadow><div>The second shadow root</div>';
+
+	var div1 = document.createElement('div');
+	div1.appendChild(document.createTextNode('div1'));
+	div1.classList.add('d1');
+	div1.addEventListener('click', function(e) {
+		var customEvent = new CustomEvent('somethingHappened', {'detail': {a: 3, x: 'bbb'}});
+		e.target.dispatchEvent(customEvent);
+	});
+	root1.appendChild(div1);
+
+	var div2 = document.createElement('div');
+	div2.appendChild(document.createTextNode('div2'));
+	div2.classList.add('d2');
+	root1.appendChild(div2);
+
+	host.addEventListener('mousedown', function(e) {
+		console.log(e);
+	});
+	host.addEventListener('somethingHappened', function(e) {
+		console.log('something happened in the host', e, e.detail);
+	});
+
+</script>
