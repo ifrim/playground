@@ -1,0 +1,65 @@
+<!doctype html>
+<title></title>
+
+<style>
+	o-list {
+		display: block;
+		width: 100px;
+		height: 50px;
+		background-color: orange;
+	}
+</style>
+
+<o-list></o-list>
+<o-btn id="btn">btn</o-btn>
+<o-btn2 id="btn2">btn2</o-btn2>
+
+<script>
+	var list = document.registerElement('o-list'),
+		oBtnPrototype = Object.create(HTMLElement.prototype);
+
+	oBtnPrototype.someProp = {a: 3, x: 4};
+	oBtnPrototype.someMethod = function() {
+		console.log(this);
+		return this;
+	};
+	oBtnPrototype.createdCallback = function() {
+		console.log('created o-btn');
+	};
+	oBtnPrototype.attachedCallback = function() {
+		console.log('attached o-btn');
+	};
+	oBtnPrototype.detachedCallback = function() {
+		console.log('detached o-btn');
+	};
+
+	document.registerElement('o-btn', {
+		prototype: oBtnPrototype
+	});
+
+	var b = document.querySelector('#btn');
+	console.log(b.someMethod().someProp);
+
+	document.registerElement('o-btn2', {
+		prototype: Object.create(HTMLElement.prototype, {
+			someProp2: {get: function() { return 'qwe'; }},
+			someMethod2: {value: function(v) {
+				return v * v;
+			}},
+			createdCallback: {value: function() {
+				console.log('created o-btn2');
+			}},
+			attachedCallback: {value: function() {
+				console.log('attached o-btn2');
+			}},
+			detachedCallback: {value: function() {
+				console.log('detached o-btn2');
+			}}
+		})
+	});
+
+	var b2 = document.querySelector('#btn2');
+	console.log(b2.someProp2, b2.someMethod2(4));
+</script>
+
+<o-btn2>btn2 (bis)</o-btn2>
