@@ -1,0 +1,16 @@
+<!doctype html>
+<title></title>
+
+<link rel="import" href="component1.html">
+<link rel="import" href="component2.html">
+
+<p>paragraph in the main document</p>
+
+<script>
+	console.log('executing sript inside main page');
+
+	var c1 = document.querySelector('[href="component1.html"]').import,
+	    c1p = c1.querySelector('p');
+	console.log(c1p);
+	document.body.appendChild(c1p);
+</script>
