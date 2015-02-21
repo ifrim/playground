@@ -20,7 +20,7 @@
 
 	oBtnPrototype.someProp = {a: 3, x: 4};
 	oBtnPrototype.someMethod = function() {
-		console.log(this);
+		console.log('btn1: what is this?', this);
 		return this;
 	};
 	oBtnPrototype.createdCallback = function() {
@@ -38,11 +38,12 @@
 	});
 
 	var b = document.querySelector('#btn');
-	console.log(b.someMethod().someProp);
+	console.log('btn1>', b.someMethod().someProp);
+	console.log('=======================');
 
 	document.registerElement('o-btn2', {
 		prototype: Object.create(HTMLElement.prototype, {
-			someProp2: {get: function() { return 'qwe'; }},
+			someProp2: {get: function() { return 'prop of o-btn2'; }},
 			someMethod2: {value: function(v) {
 				return v * v;
 			}},
@@ -60,6 +61,17 @@
 
 	var b2 = document.querySelector('#btn2');
 	console.log(b2.someProp2, b2.someMethod2(4));
+
+	function removeButton(btnId) {
+		var btn = document.querySelector('#' + btnId),
+		    parent = btn.parentElement;
+
+		console.log('parent:', parent);
+		btn.parentElement.removeChild(btn);
+		console.log('parent:', parent);
+		parent.appendChild(btn);
+	}
 </script>
 
 <o-btn2>btn2 (bis)</o-btn2>
+<button onclick="removeButton('btn2')">remove btn2</button>
