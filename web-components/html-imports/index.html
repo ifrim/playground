@@ -5,6 +5,7 @@
 <link rel="import" href="component2.html">
 
 <p>paragraph in the main document</p>
+<button onclick="importImgFromComponent2()">import image from component 2 into the main document</button>
 
 <script>
 	console.log('executing sript inside main page');
@@ -13,4 +14,11 @@
 	    c1p = c1.querySelector('p');
 	console.log(c1p);
 	document.body.appendChild(c1p);
+
+	function importImgFromComponent2() {
+		var c2 = document.querySelector('[href="component2.html"]').import,
+		    img = c2.querySelector('img');
+
+		document.body.appendChild(img);
+	}
 </script>

@@ -1,9 +1,15 @@
 <p>Text paragraph inside component 2</p>
 
+<img src="../icon-polymer.png">
+
 <style>
 	p { color: red; }
 </style>
 
 <script>
 	console.log('executing sript inside component 2');
+
+	var component2Document = document.currentScript.ownerDocument;
+
+	console.log('document !== component2Document', document !== component2Document);
 </script>
