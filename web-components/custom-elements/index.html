@@ -12,6 +12,9 @@
 
 <o-list></o-list>
 <o-btn id="btn">btn</o-btn>
+<button onclick="document.querySelector('#btn').title = 'my button title'">change o-btn title attribute</button>
+
+<br><br>
 <o-btn2 id="btn2">btn2</o-btn2>
 <o-btn-extended>extended o-btn</o-btn-extended>
 
@@ -35,6 +38,9 @@
 	};
 	oBtnPrototype.detachedCallback = function() {
 		console.log('detached o-btn');
+	};
+	oBtnPrototype.attributeChangedCallback = function(attrName, oldVal, newVal) {
+		console.log('attribute changed on o-btn: name:', attrName, 'oldVal:', oldVal, 'newVal:', newVal);
 	};
 
 	document.registerElement('o-btn', {
