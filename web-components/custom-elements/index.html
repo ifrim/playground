@@ -13,6 +13,10 @@
 <o-list></o-list>
 <o-btn id="btn">btn</o-btn>
 <o-btn2 id="btn2">btn2</o-btn2>
+<o-btn-extended>extended o-btn</o-btn-extended>
+
+<br><br>
+<input is="o-input" type="text" onblur="this.tellMeYourValue()">
 
 <script>
 	var list = document.registerElement('o-list'),
@@ -35,6 +39,16 @@
 
 	document.registerElement('o-btn', {
 		prototype: oBtnPrototype
+	});
+
+	// extending native elements
+	var oInputPrototype = Object.create(HTMLInputElement.prototype);
+	oInputPrototype.tellMeYourValue = function() {
+		console.log(this.value);
+	};
+	document.registerElement('o-input', {
+		prototype: oInputPrototype,
+		extends: 'input'
 	});
 
 	var b = document.querySelector('#btn');
