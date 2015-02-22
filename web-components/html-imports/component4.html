@@ -1,0 +1,17 @@
+<template id="tpl">
+	<header>header for component 4</header>
+	<content></content>
+	<footer>footer for component 4</footer>
+</template>
+
+<script>
+	var thisDoc = document.currentScript.ownerDocument,
+	    tpl = thisDoc.querySelector('#tpl'),
+	    proto = Object.create(HTMLElement.prototype);
+
+	proto.createdCallback = function() {
+		this.createShadowRoot().appendChild(document.importNode(tpl.content, true));
+	};
+
+	thisDoc.registerElement('component-4', {prototype: proto});
+</script>
