@@ -1,0 +1,11 @@
+<link rel="import" href="component3-1.html">
+
+<script>
+var proto = Object.create(HTMLElement.prototype);
+
+proto.createdCallback = function() {
+	this.innerHTML = '<p>component 3 paragraph  with another custom component inside: <component3-1></component3-1>, component 3 content again!!!</p>';
+};
+
+document.registerElement('component-3', {prototype: proto});
+</script>

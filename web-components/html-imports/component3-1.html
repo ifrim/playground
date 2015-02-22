@@ -1,0 +1,9 @@
+<script>
+var proto = Object.create(HTMLElement.prototype);
+
+proto.createdCallback = function() {
+	this.innerHTML = '<b>component 3.1 content</b>';
+};
+
+document.registerElement('component3-1', {prototype: proto});
+</script>
