@@ -25,3 +25,11 @@ var asyncFn = (async function() {
 
 console.log('asyncFn>', asyncFn);
 asyncFn.then(data => console.log('asyncFn data>', data));
+
+var getEminescu = async function() { 
+    return await getPerson((await getKeys())[0]);
+};
+var eminescu = getEminescu();
+
+console.log('>', getEminescu, ' :: ', eminescu);
+eminescu.then(data => console.log('eminescu>>>', data));

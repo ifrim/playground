@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "babel-runtime": "^4.7.3",
+    "babel-runtime": "^4.7.4",
     "babelify": "^5.0.4",
     "browserify": "^9.0.3"
   }
