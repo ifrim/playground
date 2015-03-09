@@ -10,7 +10,7 @@ var people = {
 var getKeys = () => new Promise(resolve => setTimeout(() => resolve(keys), 3000));
 var getPerson = (key) => new Promise(resolve => setTimeout(() => resolve(people[key]), 3000));
 
-(async function() {
+var asyncFn = (async function() {
     var keysForPeople = await getKeys();
 
     console.log('>>', keysForPeople);
@@ -19,4 +19,9 @@ var getPerson = (key) => new Promise(resolve => setTimeout(() => resolve(people[
 	let p = await person;
 	console.log(p.firstName + ' ' + p.lastName);
     }
+
+    return 'async function terminated';
 }());
+
+console.log('asyncFn>', asyncFn);
+asyncFn.then(data => console.log('asyncFn data>', data));
