@@ -16,8 +16,8 @@ var asyncFn = (async function() {
     console.log('>>', keysForPeople);
 
     for(let person of keysForPeople.map(getPerson)) {
-		let p = await person;
-		console.log(p.firstName + ' ' + p.lastName);
+		  let p = await person;
+		  console.log(p.firstName + ' ' + p.lastName);
     }
 
     return 'async function terminated';
@@ -28,7 +28,7 @@ asyncFn.then(data => console.log('asyncFn data>', data));
 
 var getEminescu = async function() {
     return await getPerson( (await getKeys())[0] );
-};
+  };
 var eminescu = getEminescu();
 
 console.log('>', getEminescu, ' :: ', eminescu);
