@@ -1,0 +1,22 @@
+<template>
+    <section>
+        <h2>${heading}</h2>
+
+        <form submit.trigger="submit()" cev.trigger="cevHandler()">
+          <div>
+            <label>First Name</label>
+            <input type="text" value.one-way="firstName">
+          </div>
+          <div>
+            <label>Last Name</label>
+            <input type="text" value.bind="lastName">
+          </div>
+          <div>
+            <label>Full Name</label>
+            <p>${fullName}</p>
+          </div>
+          <button type="submit">Submit</button>
+          <div click.trigger="cev($event)">cev</div>
+        </form>
+    </section>
+</template>
