@@ -10,6 +10,11 @@ function bootstrapNg(ngModule, data) {
 	};
 }
 
+angular.module('services', [])
+.service('RandomService', [function() {
+	this.value = 7;
+}]);
+
 angular.module('comp2', [])
 .component('comp2', {
 	template: '<span>comp2 - angular-component</span>',
@@ -28,8 +33,9 @@ var reactElement = React.createClass({
 			{id: 2, name: 'Item 2'},
 			{id: 3, name: 'Item 3'}
 		];
+		var randomService = angular.injector(['ng', 'services']).get('RandomService');
 		return React.createElement('div', {ref: bootstrapNg('comp2', {items: items})},
-			React.createElement('span', null, this.props.message),
+			React.createElement('span', null, this.props.message + ' - RandomService\'s value is ' +  randomService.value),
 			React.createElement('comp2', {'data-items': 'items'})
 		);
 	}
