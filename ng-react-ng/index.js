@@ -1,21 +1,36 @@
-function bootstrapNg(ngModule) {
+function bootstrapNg(ngModule, data) {
 	return function(element) {
 		var $element = $(element);
 		$element.data('$injector', '');
+		angular.module(ngModule).controller('MyController', ['$scope', function($scope) {
+			$.extend($scope, data);
+		}]);
+		$element.attr('ng-controller', 'MyController');
 		angular.bootstrap($element, [ngModule]);
 	};
 }
 
 angular.module('comp2', [])
 .component('comp2', {
-	template: '<span>comp2 - angular-component</span>'
+	template: '<span>comp2 - angular-component</span>',
+	bindings: {
+		items: '='
+	},
+	controller: [function() {
+		console.log('>>', this.items);
+	}]
 });
 
 var reactElement = React.createClass({
 	render: function() {
-		return React.createElement('div', null,
-			React.createElement('span', null, 'react component!'),
-			React.createElement('comp2', {ref: bootstrapNg('comp2')})
+		var items = [
+			{id: 1, name: 'Item 1'},
+			{id: 2, name: 'Item 2'},
+			{id: 3, name: 'Item 3'}
+		];
+		return React.createElement('div', {ref: bootstrapNg('comp2', {items: items})},
+			React.createElement('span', null, this.props.message),
+			React.createElement('comp2', {'data-items': 'items'})
 		);
 	}
 });
@@ -27,7 +42,7 @@ angular.module('comp1', [])
 		'<div id="react-component-wrapper" ng-non-bindable></div>',
 	controller: ['$element', function($element) {
 		ReactDOM.render(
-		    React.createElement(reactElement),
+		    React.createElement(reactElement, {message: 'react component!'}),
 		    $element[0].querySelector('#react-component-wrapper')
 		);
 	}]
