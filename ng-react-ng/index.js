@@ -2,10 +2,7 @@ function bootstrapNg(ngModule, data) {
 	return function(element) {
 		var $element = $(element);
 		$element.data('$injector', '');
-		angular.module(ngModule).controller('MyController', ['$scope', function($scope) {
-			$.extend($scope, data);
-		}]);
-		$element.attr('ng-controller', 'MyController');
+		angular.module(ngModule).run(['$rootScope', rs => $.extend(rs, data)]);
 		angular.bootstrap($element, [ngModule]);
 	};
 }
@@ -17,12 +14,12 @@ angular.module('services', [])
 
 angular.module('comp2', [])
 .component('comp2', {
-	template: '<span>comp2 - angular-component</span>',
+	template: '<span>comp2 - angular-component: <i>{{$ctrl.getItemsList()}}</i></span>',
 	bindings: {
 		items: '='
 	},
 	controller: [function() {
-		console.log('>>', this.items);
+		this.getItemsList = () => this.items.map(i => i.name).join(', ');
 	}]
 });
 
@@ -33,10 +30,16 @@ var reactElement = React.createClass({
 			{id: 2, name: 'Item 2'},
 			{id: 3, name: 'Item 3'}
 		];
+		var items2 = [
+			{id: 21, name: 'Item 2.1'},
+			{id: 22, name: 'Item 2.2'},
+			{id: 23, name: 'Item 2.3'}
+		];
 		var randomService = angular.injector(['ng', 'services']).get('RandomService');
-		return React.createElement('div', {ref: bootstrapNg('comp2', {items: items})},
+		return React.createElement('div', null,
 			React.createElement('span', null, this.props.message + ' - RandomService\'s value is ' +  randomService.value),
-			React.createElement('comp2', {'data-items': 'items'})
+			React.createElement('comp2', {'data-items': 'items', ref: bootstrapNg('comp2', {items: items})}),
+			React.createElement('comp2', {'data-items': 'items', ref: bootstrapNg('comp2', {items: items2}), style: {'marginTop': '20px'}})
 		);
 	}
 });
