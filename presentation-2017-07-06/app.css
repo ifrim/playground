@@ -1,0 +1,27 @@
+ul {
+	padding: 0 20px;
+}
+
+ul li {
+	list-style-type: none;
+}
+
+.item-completed {
+	text-decoration: line-through;
+}
+
+footer ul > li {
+	display: inline-block;
+	cursor: pointer;
+}
+
+footer ul > li:not(:first-child):before {
+	content: '|';
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: normal;
+}
+
+.is-selected {
+	font-weight: bold;
+}

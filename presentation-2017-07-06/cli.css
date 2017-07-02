@@ -1,0 +1,44 @@
+:root {
+	--prompt-height: 30px;
+}
+
+.cli-output {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: var(--prompt-height);
+	background-color: black;
+	color: white;
+	overflow: auto;
+}
+
+.cli-prompt {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: var(--prompt-height);
+	background-color: black;
+	color: white;
+	padding-left: 20px;
+}
+
+.cli-prompt:before {
+	content: '>';
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 20px;
+	line-height: var(--prompt-height);
+	text-align: center;
+}
+
+.cli-prompt input {
+	width: 100%;
+	height: var(--prompt-height);
+	border: none;
+	background-color: black;
+	color: white;
+}
