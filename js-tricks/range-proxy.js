@@ -13,3 +13,5 @@ Object.setPrototypeOf(Number.prototype, proxy);
 // console.log(1[4]); // [1, 2, 3]
 // console.log(7[12]); // [7, 8, 9, 10, 11]
 // console.log(3 ._7); // [3, 4, 5, 6]
+// console.log(3.._7); // [3, 4, 5, 6]
+// console.log(3.[7]); // [3, 4, 5, 6]
