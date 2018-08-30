@@ -1,6 +1,5 @@
 class fractalPainter {
 	paint(ctx, geometry, properties) {
-
 		let width;
 		let height;
 

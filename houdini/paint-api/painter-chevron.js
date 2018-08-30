@@ -10,6 +10,10 @@ class chevronPainter {
 	}
 
 	paint(ctx, geometry, properties) {
+
+		let originalSvgWidth = 16;
+		let originalSvgHeight = 16;
+
 		let color = properties.get('--chevron-color').toString() || 'blue';
 		let orientation = properties.get('--chevron-orientation').toString().trim() || 'left';
 		let baseAngle = ({
@@ -38,9 +42,6 @@ class chevronPainter {
 		ctx.lineTo(x(11), y(11.9));
 
 		ctx.fill();
-
-		let originalSvgWidth = 16;
-		let originalSvgHeight = 16;
 
 		function x(value) {
 			return value * geometry.width / originalSvgWidth;
